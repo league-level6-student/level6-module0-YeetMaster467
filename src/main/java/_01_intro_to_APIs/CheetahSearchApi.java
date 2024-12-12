@@ -1,4 +1,4 @@
-package _01_intro_to_APIs;
+/*package _01_intro_to_APIs;
 
 import _01_intro_to_APIs.data_transfer_objects.Result;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +20,7 @@ This API was created by the Cheetah class at the League of Amazing Programmers, 
  */
 
 
-public class CheetahSearchApi {
+/*public class CheetahSearchApi {
 
     private static final String baseUrl = "https://cheetah.api.jointheleague.org/searchLocResults";
 
@@ -45,7 +45,7 @@ public class CheetahSearchApi {
         This uri is where are making our GET request the resulting uri would look like:
         https://cheetah.api.jointheleague.org/searchLocResults?q=java
         */
-        Mono<String> stringMono = webClient
+        /*Mono<String> stringMono = webClient
         		.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("q", "Java")
@@ -78,7 +78,7 @@ public class CheetahSearchApi {
         Once we have created those classes, we are able to save the response as a java object, and effectively
         manipulate the response using getters to pull exactly what we need out of it.
          */
-        String response = stringMono.block();
+        /*String response = stringMono.block();
 
         System.out.println(response);
     }
@@ -121,6 +121,6 @@ public class CheetahSearchApi {
         this.webClient = webClient;
     }
 
-}
+}*/
 
 
