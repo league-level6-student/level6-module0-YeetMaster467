@@ -49,7 +49,7 @@ public class CatFactsApi {
         this is what you will input into jsonschema2pojo.com
          */
 
-        //System.out.println(response);
+        System.out.println(response);
 
 
         /*
@@ -63,24 +63,30 @@ public class CatFactsApi {
         */
     }
 
-    public String getCatFact() {
+    public CatWrapper getCatFact() {
 
         //Make the request, saving the response in an object of the type that you just created in your
         //data_transfer_objects package (CatWrapper)
 
-        Mono<String> stringMono = webClient
+        Mono<CatWrapper> stringMono = webClient
                 .get()
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(CatWrapper.class);
 
-        CatWrapper c = new CatWrapper();
 
-        //List<String> l = c.setData(stringMono.);
+
+
+
+
+
+        CatWrapper l = stringMono.block();
+
+        System.out.println(l);
 
         //Use block() to collect the response into a java object using the class you just created
 
         //return the Object
-        return null;
+        return l;
 
 
     }
@@ -89,7 +95,7 @@ public class CatFactsApi {
         //use the getCatFact method to retrieve a cat fact
 
         //return the first (and only) String in the Arraylist of data in the response
-        return null;
+        return getCatFact().getData().get(0);
     }
 
     public void setWebClient(WebClient webClient) {
