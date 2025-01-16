@@ -1,5 +1,6 @@
 package _04_jeopardy_api;
 
+import _02_cat_facts_API.data_transfer_objects.CatWrapper;
 import _04_jeopardy_api.data_transfer_objects.Clue;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,12 +40,25 @@ public class JeopardyApi {
         //
         //Make sure to save the response as type Clue[].class in the bodyToMono() method call
 
+        Mono<Clue[]> stringMono = webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("value", value)
+                        .build())
+                .retrieve()
+                .bodyToMono(Clue[].class);
+
+        System.out.println(stringMono.block().toString());
+
         //2
         //Get a random number less than the size of the Clue array
+
+        Random r = new Random();
+        int randNum = r.nextInt(stringMono.block().length);
 
         //3
         //return the clue at the random index you just created
 
-        return null;
+        return stringMono.block()[randNum];
     }
 }
