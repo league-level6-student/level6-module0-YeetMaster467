@@ -20,10 +20,11 @@ import static org.mockito.Mockito.*;
 class MyDonutShopTest {
 
     MyDonutShop myDonutShop;
-    PaymentService paymentService;
-    DeliveryService deliveryService;
     BakeryService bakeryService;
 
+    @Mock
+    PaymentService paymentService;
+    DeliveryService deliveryService;
     DeliveryDriver deliveryDriver;
 
     @BeforeEach
@@ -32,9 +33,6 @@ class MyDonutShopTest {
 
         List<DeliveryDriver> availableDeliveryDrivers = Collections.singletonList(deliveryDriver);
 
-        paymentService = new PaymentService();
-        deliveryService = new DeliveryService(availableDeliveryDrivers);
-        bakeryService = new BakeryService();
         myDonutShop = new MyDonutShop(paymentService, deliveryService, bakeryService);
 
         myDonutShop.openForTheDay();
@@ -47,10 +45,10 @@ class MyDonutShopTest {
         Order order = new Order("James", "411", 6, 10, "3", true);
 
         //when
-        myDonutShop.takeOrder(order);
+        bakeryService.getDonutsRemaining();
 
         //then
-        verify(myDonutShop, times(1)).takeOrder(order);
+        verify(deliveryDriver, times(1)).completeDelivery(order);
     }
 
     @Test
